@@ -1,10 +1,14 @@
 import React from 'react';
 import Logo from '../../../Component/Logo/Logo';
+import { NavLink } from 'react-router';
 
 const NavBar = () => {
     const link = <>
-        <li><a>Item 1</a></li>
-        <li><a>Item 3</a></li>
+        <li><NavLink to="">Services</NavLink></li>
+        <li><NavLink to="">Coverage</NavLink></li>
+        <li><NavLink to="">About Us</NavLink></li>
+        <li><NavLink to="">Pricing</NavLink></li>
+        <li><NavLink to="">Be a Rider</NavLink></li>
     </>
     return (
         <div>
@@ -24,9 +28,9 @@ const NavBar = () => {
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
-                       {
-                        link
-                       }
+                        {
+                            link
+                        }
                     </ul>
                 </div>
                 <div className="navbar-end">
