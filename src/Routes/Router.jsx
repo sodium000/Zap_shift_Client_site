@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import RootLayout from "../Layouts/RootLayout";
 import Home from "../Pages/Home/Homepage/Home";
+import Coverages from "../Pages/Coverage/Coverages";
 
 
 const router = createBrowserRouter([
@@ -11,6 +12,10 @@ const router = createBrowserRouter([
         {
             index : true,
             Component : Home
+        },
+        {
+            path: 'coverage',
+            Component : Coverages
         }
     ]
   },
