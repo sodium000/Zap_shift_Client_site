@@ -5,7 +5,7 @@ import Services from '../Service/Services';
 import Brand from '../Brand/Brand';
 import Review from '../Brand/Review/Review';
 
-const reviewsPromise = fetch('./reviews.json').then(res => res.json());
+const reviewsPromise = fetch('/reviews.json').then(res => res.json());
 
 const Home = () => {
     return (
