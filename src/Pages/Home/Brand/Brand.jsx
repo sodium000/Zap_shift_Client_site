@@ -12,7 +12,7 @@ const brand = [amazon_vactor, amazon, casio, moonstar, randstas, star, star_peop
 
 const Brand = () => {
     return (
-        <div className='mt-15 flex flex-col gap-10 justify-center items-center '>
+        <div className='mt-25 flex flex-col gap-10 justify-center items-center '>
             <div className='font-bold text-2xl text-secondary'>
                 We've helped thousands of sales teams
             </div>

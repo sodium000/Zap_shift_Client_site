@@ -18,7 +18,7 @@ const Banner = () => {
             showThumbs={false}
             showStatus={false}
             showArrows={false}
-        // transitionTime= 1000
+            transitionTime= {1000}
         >
             <div className='relative'>
                 <img src={banner1} />

@@ -3,7 +3,7 @@ import Delivery_logo from '../../../assets/bookingIcon.png'
 
 const HowWork = () => {
     return (
-        <div className='mt-40 px-15 flex flex-col gap-10'>
+        <div className='mt-20 px-15 flex flex-col gap-10'>
             <div className='font-bold text-2xl'>
                 How it Works
             </div>
