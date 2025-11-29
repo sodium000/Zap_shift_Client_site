@@ -5,9 +5,9 @@ import AuthLogo from '../assets/authImage.png'
 
 const AuthLayout = () => {
     return (
-        <div className='max-w-7xl mx-auto'>
+        <div className='max-w-7xl mx-auto mt-10'>
             <Logo></Logo>
-            <div className='flex items-center justify-between'>
+            <div className='flex flex-col-reverse md:flex-row  items-center justify-between'>
                 <div className='flex-1'>
                     <Outlet></Outlet>
                 </div>

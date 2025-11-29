@@ -1,27 +1,63 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { AuthContext } from './AuthContext/AuthContext';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
 import { auth } from '../Component/firebase.init';
 
-const AuthProvider = ({children}) => {
 
-    const registerUser =(email,password)=>{
-        return createUserWithEmailAndPassword(auth,email,password)
+const AuthProvider = ({ children }) => {
+    const [user, setUser] = useState(null)
+    const [loading, setLoading] = useState(true)
+
+    const provider = new GoogleAuthProvider();
+
+    const SignWithGoogle = () => {
+        setLoading(true)
+        return signInWithPopup(auth, provider)
+            .then((result) => console.log(result.user))
+            .catch((error) => console.log(error))
     }
-    const signInUser =(email,password)=>{
-        return signInWithEmailAndPassword(auth,email,password)
+
+    const logOut = () => {
+        return signOut(auth).then(() => {
+            // Sign-out successful.
+        }).catch((error) => {
+                console.log(error)
+        });
     }
 
+    const registerUser = (email, password) => {
+        setLoading(true)
+        return createUserWithEmailAndPassword(auth, email, password)
+    }
+    const signInUser = (email, password) => {
+        setLoading(true)
+        return signInWithEmailAndPassword(auth, email, password)
+    }
+
+    // observe user state
+    useEffect(() => {
+        const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser);
+            setLoading(false)
+        })
+        return () => {
+            unSubscribe();
+        }
+    }, [])
 
 
 
 
 
-    
 
-    const authInfo={
+    const authInfo = {
+        user,
         registerUser,
-        signInUser
+        signInUser,
+        SignWithGoogle,
+        loading,
+        setLoading,
+        logOut
     }
 
 
