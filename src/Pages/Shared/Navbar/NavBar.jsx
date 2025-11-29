@@ -2,9 +2,10 @@ import React from 'react';
 import Logo from '../../../Component/Logo/Logo';
 import { Link, NavLink } from 'react-router';
 import useAuth from '../../../hooks/useAuth';
+import Loading from '../../../Component/Loading/Loading';
 
 const NavBar = () => {
-    const {user}= useAuth()
+    const { user, loading,logOut } = useAuth()
     const link = <>
         <li><NavLink to="">Services</NavLink></li>
         <li><NavLink to="/coverage">Coverage</NavLink></li>
@@ -36,14 +37,16 @@ const NavBar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    {
-                        user ? <Link className="btn">LogOut</Link>
-                        :<Link className="btn">LogIn</Link>
+                    {loading ? <Loading></Loading>
+                        :
+                        user ? <button onClick={()=>logOut()}><Link  className="btn">LogOut</Link></button>
+                            : <Link to='/login' className="btn">LogIn</Link>
                     }
                 </div>
             </div>
         </div>
     );
 };
+
 
 export default NavBar;
