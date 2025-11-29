@@ -3,19 +3,39 @@ import { useForm } from 'react-hook-form';
 import useAuth from '../../../hooks/useAuth';
 import { Link } from 'react-router';
 import SocalLogin from '../SocalLogin';
+import axios from 'axios';
 
 const Regiester = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
-    const { registerUser } = useAuth();
+    const { registerUser, Updateprofile } = useAuth();
 
     const handelRegiester = (data) => {
-        console.log(data);
+        const ProfilImage = data.Photo[0];
+
         registerUser(data.Email, data.Password)
             .then(result => {
                 console.log(result.user);
+
+                // storage imge url
+                const fromData = new FormData()
+                fromData.append('image', ProfilImage);
+
+                const image_Api_Url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_host}`
+
+                axios.post(image_Api_Url, fromData)
+                    .then(res => {
+                        // update user profile
+                        const UserProfile = {
+                            displayName: data.Name,
+                            photoURL: res.data.data.url
+                        }
+
+                        Updateprofile(UserProfile)
+                    })
             })
             .catch(error => console.log(error))
     }
+    
     return (
         <div className='mx-auto mt-10 max-w-[400px] '>
             <form onSubmit={handleSubmit(handelRegiester)} className='ml-20 mt-20'>
@@ -41,6 +61,16 @@ const Regiester = () => {
                     {
                         errors.Email?.type === "required" && <p className='text-red-500 font-bold'>Email is Required</p>
                     }
+
+                    {/* photo url */}
+                    <label className="label">Photo</label>
+                    <input type="file" {...register('Photo', {
+                        required: true
+                    })} className="file-input border-sky-300  font-black focus-within:outline-sky-300 focus-within:border-none" placeholder="Your Photo" />
+                    {
+                        errors.Photo?.type === "required" && <p className='text-red-500 font-bold'>Photo is Required</p>
+                    }
+
                     {/* password */}
                     <label className="label  border-sky-300 focus-within:outline-sky-300 focus-within:border-none">Password</label>
                     <input type="password" {...register('Password', {

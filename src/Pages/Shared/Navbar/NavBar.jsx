@@ -36,12 +36,13 @@ const NavBar = () => {
                         }
                     </ul>
                 </div>
-                <div className="navbar-end">
+                <div className="navbar-end ">
                     {loading ? <Loading></Loading>
                         :
-                        user ? <button onClick={()=>logOut()}><Link  className="btn">LogOut</Link></button>
+                        user ? <button onClick={()=>logOut()}><Link  className="btn rounded-xl">LogOut</Link></button>
                             : <Link to='/login' className="btn">LogIn</Link>
                     }
+                    <Link to='/beARider' className="btn btn-primary rounded-xl text-black mx-4">Be a Rider</Link>
                 </div>
             </div>
         </div>
