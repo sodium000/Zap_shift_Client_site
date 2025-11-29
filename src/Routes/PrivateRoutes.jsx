@@ -1,19 +1,21 @@
 import React from 'react';
 import useAuth from '../hooks/useAuth';
 import Loading from '../Component/Loading/Loading';
-import { Navigate } from 'react-router';
+import { Navigate, useLocation } from 'react-router';
 
 
 
 const PrivateRoutes = ({children}) => {
     const {user,loading}=useAuth();
 
+    const location = useLocation();
+
     if (loading) {
         return <div className='flex justify-center items-center h-[300px]'><Loading></Loading></div>
     }
 
     if (!user) {
-        return <Navigate to='/login'></Navigate>
+        return <Navigate state={location.pathname} to='/login'></Navigate>
     }
 
     return children;

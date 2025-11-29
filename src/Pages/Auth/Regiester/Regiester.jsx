@@ -1,24 +1,30 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../../hooks/useAuth';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import SocalLogin from '../SocalLogin';
 import axios from 'axios';
 
 const Regiester = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
     const { registerUser, Updateprofile } = useAuth();
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const handelRegiester = (data) => {
         const ProfilImage = data.Photo[0];
+
 
         registerUser(data.Email, data.Password)
             .then(result => {
                 console.log(result.user);
 
-                // storage imge url
+                // Store the image in from data 
+
                 const fromData = new FormData()
                 fromData.append('image', ProfilImage);
+
+
 
                 const image_Api_Url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_host}`
 
@@ -31,11 +37,14 @@ const Regiester = () => {
                         }
 
                         Updateprofile(UserProfile)
+                        .then(()=>{
+                            navigate(location?.state || '/')
+                        })
                     })
             })
             .catch(error => console.log(error))
     }
-    
+
     return (
         <div className='mx-auto mt-10 max-w-[400px] '>
             <form onSubmit={handleSubmit(handelRegiester)} className='ml-20 mt-20'>
@@ -89,7 +98,7 @@ const Regiester = () => {
                     }
 
                     <button className="btn btn-primary text-black font-bold mt-4">Regiester</button>
-                    <p className='mt-2'>Already Have a Zap Shift Account<Link to='/login' className='ml-1 link link-hover text-blue-500 hover:font-bold'>Sign In</Link></p>
+                    <p className='mt-2'>Already Have a Zap Shift Account<Link state={location.state} to='/login' className='ml-1 link link-hover text-blue-500 hover:font-bold'>Sign In</Link></p>
                 </fieldset>
             </form>
             <SocalLogin></SocalLogin>

@@ -27,7 +27,7 @@ const NavBar = () => {
                             {link}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl"><Logo></Logo></a>
+                    <button className="btn btn-ghost text-xl"><Logo></Logo></button>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
@@ -42,7 +42,7 @@ const NavBar = () => {
                         user ? <button onClick={()=>logOut()}><Link  className="btn rounded-xl">LogOut</Link></button>
                             : <Link to='/login' className="btn">LogIn</Link>
                     }
-                    <Link to='/beARider' className="btn btn-primary rounded-xl text-black mx-4">Be a Rider</Link>
+                    <Link to='/rider' className="btn btn-primary rounded-xl text-black mx-4">Be a Rider</Link>
                 </div>
             </div>
         </div>

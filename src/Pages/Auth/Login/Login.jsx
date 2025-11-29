@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../../hooks/useAuth';
-import { Link } from 'react-router';
+import { Link,useLocation, useNavigate } from 'react-router';
 import SocalLogin from '../SocalLogin';
 
 const Login = () => {
@@ -9,10 +9,17 @@ const Login = () => {
     const { signInUser } = useAuth();
 
 
+    const location = useLocation()
+    const Navigate = useNavigate()
+    console.log(location)
+
+
     const handelLogin = (data) => {
         console.log(data)
         signInUser(data.Email, data.Password)
-            .then(result => console.log(result.user))
+            .then(() => {
+                Navigate(location?.state || '/')
+            })
             .catch(error => console.log(error))
     }
     return (
@@ -50,7 +57,7 @@ const Login = () => {
                         <div><a className="link link-hover text-gray-700 hover:font-bold">Forgot password?</a></div>
 
                         <button className="btn btn-primary text-black font-bold mt-4 ">Login</button>
-                        <p className='mt-2 text-center'>New to Zap Shift <Link to='/regiester' className='ml-1 link link-hover text-blue-500 hover:font-bold'>Register</Link></p>
+                        <p className='mt-2 text-center'>New to Zap Shift <Link to='/regiester' state={location.state} className='ml-1 link link-hover text-blue-500 hover:font-bold'>Register</Link></p>
                     </fieldset>
                 </form>
             </div>
