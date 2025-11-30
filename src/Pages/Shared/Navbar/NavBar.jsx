@@ -5,13 +5,18 @@ import useAuth from '../../../hooks/useAuth';
 import Loading from '../../../Component/Loading/Loading';
 
 const NavBar = () => {
-    const { user, loading,logOut } = useAuth()
+    const { user, loading, logOut } = useAuth()
     const link = <>
         <li><NavLink to="">Services</NavLink></li>
         <li><NavLink to="/coverage">Coverage</NavLink></li>
         <li><NavLink to="">About Us</NavLink></li>
         <li><NavLink to="/send-parcel">Send Parcel</NavLink></li>
         <li><NavLink to="/rider">Be a Rider</NavLink></li>
+        {
+            user && <>
+                <li><NavLink to="/dashboard/my-parcels">My Parcels</NavLink></li>
+            </>
+        }
     </>
     return (
         <div>
@@ -39,7 +44,7 @@ const NavBar = () => {
                 <div className="navbar-end ">
                     {loading ? <Loading></Loading>
                         :
-                        user ? <button onClick={()=>logOut()}><Link  className="btn rounded-xl">LogOut</Link></button>
+                        user ? <button onClick={() => logOut()}><Link className="btn rounded-xl">LogOut</Link></button>
                             : <Link to='/login' className="btn">LogIn</Link>
                     }
                     <Link to='/rider' className="btn btn-primary rounded-xl text-black mx-4">Be a Rider</Link>

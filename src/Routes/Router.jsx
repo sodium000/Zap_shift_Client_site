@@ -54,7 +54,7 @@ const router = createBrowserRouter([
   },
     {
     path: 'dashboard',
-    element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+    element: <PrivateRoutes><DashboardLayout></DashboardLayout></PrivateRoutes>,
     children: [
       {
         path: 'my-parcels', 
