@@ -90,11 +90,15 @@ const MyParcels = () => {
                                             <span className='text-green-400'>Paid</span>
                                             :
                                             <Link to={`/dashboard/payment/${parcel._id}`}>
-                                                <button  className="btn btn-sm btn-primary text-black">Pay</button>
+                                                <button className="btn btn-sm btn-primary text-black">Pay</button>
                                             </Link>
                                     }
                                 </td>
-                                <td>{parcel.deliveryStatus}</td>
+                                <td>{
+                                    parcel.paymentStatus === 'paid' ?
+                                        <span className='text-green-400'>{parcel.trackingId}</span>
+                                        :
+                                        <span className='text-orange-400'>Pay Fast</span>}</td>
                                 <td>
                                     <button className='btn btn-square hover:bg-primary'>
                                         <FaMagnifyingGlass />
