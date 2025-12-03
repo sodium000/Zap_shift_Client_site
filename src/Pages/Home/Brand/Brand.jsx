@@ -16,7 +16,7 @@ const Brand = () => {
             <div className='font-bold text-2xl text-secondary'>
                 We've helped thousands of sales teams
             </div>
-            <div className='flex gap-5 items-center max-w-7xl mx-auto'>
+            <div className='flex gap-5 items-center max-w-7xl mx-auto'> 
                 <Marquee
                  autoFill={true}
                  >
