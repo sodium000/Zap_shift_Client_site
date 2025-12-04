@@ -11,9 +11,7 @@ const Login = () => {
 
     const location = useLocation()
     const Navigate = useNavigate()
-    console.log(location)
-
-
+    
     const handelLogin = (data) => {
         console.log(data)
         signInUser(data.Email, data.Password)

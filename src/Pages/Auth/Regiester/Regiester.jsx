@@ -4,23 +4,22 @@ import useAuth from '../../../hooks/useAuth';
 import { Link, useLocation, useNavigate } from 'react-router';
 import SocalLogin from '../SocalLogin';
 import axios from 'axios';
+import useAxiosSecure from '../../../hooks/userAxios/useAxiosSecure';
 
 const Regiester = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
     const { registerUser, Updateprofile } = useAuth();
     const location = useLocation();
     const navigate = useNavigate();
+    const axiosSecure = useAxiosSecure();
 
     const handelRegiester = (data) => {
         const ProfilImage = data.Photo[0];
 
 
         registerUser(data.Email, data.Password)
-            .then(result => {
-                console.log(result.user);
-
+            .then(() => {
                 // Store the image in from data 
-
                 const fromData = new FormData()
                 fromData.append('image', ProfilImage);
 
@@ -30,16 +29,30 @@ const Regiester = () => {
 
                 axios.post(image_Api_Url, fromData)
                     .then(res => {
+
+                        const photoURL = res.data.data.url;
+                        // create user in the database
+                        const userInfo = {
+                            email: data.email,
+                            displayName: data.name,
+                            photoURL: photoURL
+                        }
+                        axiosSecure.post('/users', userInfo)
+                        .then(res =>{
+                            if(res.data.insertedId){
+                                console.log('user created in the database');
+                            }
+                        })
+
                         // update user profile
                         const UserProfile = {
                             displayName: data.Name,
-                            photoURL: res.data.data.url
+                            photoURL: photoURL
                         }
-
                         Updateprofile(UserProfile)
-                        .then(()=>{
-                            navigate(location?.state || '/')
-                        })
+                            .then(() => {
+                                navigate(location?.state || '/')
+                            })
                     })
             })
             .catch(error => console.log(error))
