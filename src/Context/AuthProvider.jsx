@@ -19,7 +19,6 @@ const AuthProvider = ({ children }) => {
 
     const logOut = () => {
         return signOut(auth).then(() => {
-            // Sign-out successful.
         }).catch((error) => {
                 console.log(error)
         });
