@@ -2,6 +2,7 @@ import React from 'react';
 import { CiDeliveryTruck } from 'react-icons/ci';
 import { Link, NavLink, Outlet } from 'react-router';
 import { MdWorkHistory } from "react-icons/md";
+import { FaMotorcycle } from 'react-icons/fa6';
 
 const DashboardLayout = () => {
     return (
@@ -26,7 +27,7 @@ const DashboardLayout = () => {
                 <div className="flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-20 is-drawer-open:w-64">
 
                     <ul className="menu w-full grow">
-   
+
                         <li>
                             <Link to="/" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
 
@@ -45,6 +46,12 @@ const DashboardLayout = () => {
                             <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="MyParcels" to="/dashboard/Payment-History">
                                 <MdWorkHistory size={30} />
                                 <span className="is-drawer-close:hidden">Payment History</span>
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Approve Riders" to="/dashboard/approve-riders">
+                                <FaMotorcycle size={30} />
+                                <span className="is-drawer-close:hidden">Approve Riders</span>
                             </NavLink>
                         </li>
 

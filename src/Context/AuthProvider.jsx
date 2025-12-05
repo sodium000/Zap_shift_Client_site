@@ -13,8 +13,6 @@ const AuthProvider = ({ children }) => {
     const SignWithGoogle = () => {
         setLoading(true)
         return signInWithPopup(auth, provider)
-            .then((result) => console.log(result.user))
-            .catch((error) => console.log(error))
     }
 
     const logOut = () => {
