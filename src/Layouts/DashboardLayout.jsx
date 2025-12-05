@@ -3,8 +3,12 @@ import { CiDeliveryTruck } from 'react-icons/ci';
 import { Link, NavLink, Outlet } from 'react-router';
 import { MdWorkHistory } from "react-icons/md";
 import { FaMotorcycle } from 'react-icons/fa6';
+import { RiEBikeFill } from 'react-icons/ri';
+import { FaUsers } from 'react-icons/fa';
+import useRole from '../hooks/useRole';
 
 const DashboardLayout = () => {
+    const { role } = useRole();
     return (
         <div className="drawer lg:drawer-open ">
             <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -48,12 +52,29 @@ const DashboardLayout = () => {
                                 <span className="is-drawer-close:hidden">Payment History</span>
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Approve Riders" to="/dashboard/approve-riders">
-                                <FaMotorcycle size={30} />
-                                <span className="is-drawer-close:hidden">Approve Riders</span>
-                            </NavLink>
-                        </li>
+
+                        {
+                            role === 'admin' &&<>
+                                <li>
+                                    <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Approve Riders" to="/dashboard/approve-riders">
+                                        <FaMotorcycle size={30} />
+                                        <span className="is-drawer-close:hidden">Approve Riders</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Assign Riders" to="/dashboard/assign-riders">
+                                        <RiEBikeFill size={30} />
+                                        <span className="is-drawer-close:hidden">Assign Riders</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Users Management" to="/dashboard/users-management">
+                                        <FaUsers size={30}></FaUsers>
+                                        <span className="is-drawer-close:hidden">Users Management</span>
+                                    </NavLink>
+                                </li>
+                            </>
+                        }
 
                         <li>
                             <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Settings">

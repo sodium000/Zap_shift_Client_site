@@ -60,7 +60,7 @@ const ApproveRiders = () => {
                     </thead>
                     <tbody>
                         {
-                            riders.map((rider, index) => <tr>
+                            riders.map((rider, index) => <tr key={index}>
                                 <th>{index + 1}</th>
                                 <td>{rider.name}</td>
                                 <td>{rider.email}</td>
